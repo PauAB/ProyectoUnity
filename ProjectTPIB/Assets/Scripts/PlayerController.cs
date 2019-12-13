@@ -11,10 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Camera mainCamera;
 
-    public float speed;
-    public float gravity = -9.81f;
+    public float speed;    
     public float groundDistance = 0.4f;
-    public float jumpHeight = 3f;
+    public float jumpForce = 3f;
+    public float mouseSensitivity;
 
     Rigidbody rb;
     Vector3 velocity;    
@@ -29,55 +29,28 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 targetDirection = new Vector3(x, 0f, z);
+        Vector3 targetDirection = transform.right * x + transform.forward * z;
+
         targetDirection = mainCamera.transform.TransformDirection(targetDirection);
-        targetDirection.y = 0.0f;
+        targetDirection.y = 0.0f;        
 
-        Vector3 newTargetDirection = transform.right * x + transform.forward * z;
-        newTargetDirection = mainCamera.transform.TransformDirection(newTargetDirection);
+        transform.position += targetDirection * speed * Time.deltaTime;
 
-        rb.MovePosition(newTargetDirection * speed * Time.deltaTime);
-
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-
-        Quaternion newRotation = Quaternion.Lerp(rb.rotation, targetRotation, Time.deltaTime);
-
-        rb.MoveRotation(newRotation);
+        //transform.rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
         if (Input.GetButtonDown("Jump") && CheckIsGrounded())
         {
-            Jump();
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-    }
-
-    void Movement(float horizontal, float vertical)
-    {
-        if (horizontal != 0f || vertical != 0f)
-        {
-            Rotation(horizontal, vertical);
-        }
-    }
-
-    void Rotation(float horizontal, float vertical)
-    {
-        Vector3 targetDirection = new Vector3(horizontal, 0f, vertical);
-        targetDirection = mainCamera.transform.TransformDirection(targetDirection);
-        targetDirection.y = 0.0f;
-
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-
-        Quaternion newRotation = Quaternion.Lerp(rb.rotation, targetRotation, Time.deltaTime);
-
-        rb.MoveRotation(newRotation);
-    }
-
-    void Jump()
-    {
-        rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
     }
 
     bool CheckIsGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(groundCheck.position, groundDistance);
     }
 }
