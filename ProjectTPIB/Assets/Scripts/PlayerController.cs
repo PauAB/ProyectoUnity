@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     LayerMask groundMask;
     [SerializeField]
     Camera mainCamera;
+    [SerializeField]
+    Transform playerBody;
 
     public float speed;    
     public float groundDistance = 0.4f;
@@ -26,31 +28,26 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;        
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 targetDirection = transform.right * x + transform.forward * z;
-
-        targetDirection = mainCamera.transform.TransformDirection(targetDirection);
-        targetDirection.y = 0.0f;        
+        Vector3 targetDirection = transform.right * x + transform.forward * z;    
+        targetDirection = mainCamera.transform.TransformDirection(targetDirection);        
 
         transform.position += targetDirection * speed * Time.deltaTime;
 
-        //transform.rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        playerBody.Rotate(Vector3.up * mouseX);
 
-        if (Input.GetButtonDown("Jump") && CheckIsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-    }
+    }    
 
-    bool CheckIsGrounded()
+    bool IsGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawSphere(groundCheck.position, groundDistance);
-    }
+    }    
 }
