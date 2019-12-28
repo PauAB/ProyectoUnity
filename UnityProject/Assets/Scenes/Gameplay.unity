@@ -348,7 +348,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1396877346}
   m_Father: {fileID: 1188362217}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -532,7 +533,7 @@ GameObject:
   - component: {fileID: 725244247}
   m_Layer: 0
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,7 +549,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1188362217}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1188362215
 GameObject:
@@ -560,6 +561,7 @@ GameObject:
   - component: {fileID: 1188362217}
   - component: {fileID: 1188362216}
   - component: {fileID: 1188362218}
+  - component: {fileID: 1188362219}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -595,7 +597,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 282840814}
-  - {fileID: 1396877346}
   - {fileID: 1905899027}
   - {fileID: 725244247}
   m_Father: {fileID: 0}
@@ -620,7 +621,25 @@ MonoBehaviour:
   speed: 8
   gravity: -9.81
   groundDistance: 0.4
-  jumpHeight: 2
+  jumpHeight: 1
+--- !u!114 &1188362219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1188362215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92800f377c8a2714b8f0ae8f4155f5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 282840813}
+  arrowPrefab: {fileID: 1128896333401858, guid: dfff224a06df81d488c25d7b97c9e7f1,
+    type: 2}
+  arrowSpawn: {fileID: 1396877346}
+  speed: 50
+  chargeMax: 1
+  chargeSpeedRate: 1
 --- !u!1 &1332811712
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +683,7 @@ GameObject:
   - component: {fileID: 1396877347}
   m_Layer: 0
   m_Name: ArrowSpawn
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -675,12 +694,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1396877345}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.25, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.25, y: -0.25, z: 0.5}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 1188362217}
-  m_RootOrder: 1
+  m_Father: {fileID: 282840814}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1396877347
 MeshRenderer:
@@ -767,7 +786,7 @@ GameObject:
   - component: {fileID: 1905899028}
   m_Layer: 0
   m_Name: PlayerBody
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -783,7 +802,7 @@ Transform:
   m_LocalScale: {x: 1.1, y: 0.9, z: 1.1}
   m_Children: []
   m_Father: {fileID: 1188362217}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1905899028
 MeshRenderer:
@@ -840,7 +859,7 @@ GameObject:
   - component: {fileID: 1985061200}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
