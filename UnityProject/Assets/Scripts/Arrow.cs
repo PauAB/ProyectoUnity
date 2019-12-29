@@ -28,6 +28,10 @@ public class Arrow : MonoBehaviour {
         if (collision.collider.tag != "Arrow" && collision.collider.tag != "Player")
         {
             hitSomething = true;
+            
+            if (collision.rigidbody != null)
+                transform.parent = collision.transform;
+
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }        
     }

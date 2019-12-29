@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 282840813}
-  arrowPrefab: {fileID: 1128896333401858, guid: dfff224a06df81d488c25d7b97c9e7f1,
+  arrowPrefab: {fileID: 1647185631579412, guid: dfff224a06df81d488c25d7b97c9e7f1,
     type: 2}
   arrowSpawn: {fileID: 1396877346}
   chargeSlider: {fileID: 396608550}
@@ -1404,7 +1404,7 @@ GameObject:
   m_Layer: 0
   m_Name: ArrowSpawn
   m_TagString: Player
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
