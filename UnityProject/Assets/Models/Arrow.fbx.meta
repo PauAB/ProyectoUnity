@@ -13,6 +13,16 @@ ModelImporter:
     100014: Wing1M
     100016: Wing2M
     100018: Wing3M
+    100020: node_id10
+    100022: node_id12
+    100024: node_id14
+    100026: node_id16
+    100028: node_id18
+    100030: node_id19
+    100032: node_id20
+    100034: node_id5
+    100036: node_id6
+    100038: node_id8
     400000: //RootNode
     400002: HeadM
     400004: JNTG
@@ -23,15 +33,50 @@ ModelImporter:
     400014: Wing1M
     400016: Wing2M
     400018: Wing3M
+    400020: node_id10
+    400022: node_id12
+    400024: node_id14
+    400026: node_id16
+    400028: node_id18
+    400030: node_id19
+    400032: node_id20
+    400034: node_id5
+    400036: node_id6
+    400038: node_id8
     2100000: Pole
     2100002: Point
     2100004: Wings
+    2100006: Material_37
+    2100008: Material_38
+    2100010: Material_39
+    2100012: Material_66
+    2100014: Material_41
+    2100016: Material_42
+    2100018: Material_68
+    2300000: node_id10
+    2300002: node_id12
+    2300004: node_id14
+    2300006: node_id16
+    2300008: node_id6
+    2300010: node_id8
+    3300000: node_id10
+    3300002: node_id12
+    3300004: node_id14
+    3300006: node_id16
+    3300008: node_id6
+    3300010: node_id8
     4300000: PoleM
     4300002: TipM
     4300004: HeadM
     4300006: Wing1M
     4300008: Wing2M
     4300010: Wing3M
+    4300012: node_id6
+    4300014: node_id8
+    4300016: node_id10
+    4300018: node_id12
+    4300020: node_id14
+    4300022: node_id16
     9500000: //RootNode
     13700000: HeadM
     13700002: PoleM
@@ -70,7 +115,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 25
+    globalScale: 400
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
