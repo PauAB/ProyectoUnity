@@ -6,7 +6,8 @@ public class Arrow : MonoBehaviour {
 
     Rigidbody rb;
 
-    private float lifeTimer = 2f;
+    private float lifetime = 1f;
+    private float maxLifetime = 8f;
     private bool hitSomething = false;    
 
 	void Start ()
@@ -18,9 +19,9 @@ public class Arrow : MonoBehaviour {
 	void Update ()
     {
         if (!hitSomething)
-            transform.rotation = Quaternion.LookRotation(rb.velocity);        
+            transform.rotation = Quaternion.LookRotation(rb.velocity);
 
-        Destroy(gameObject, lifeTimer);
+        Destroy(gameObject, maxLifetime);
 	}
 
     private void OnCollisionEnter(Collision collision)
@@ -33,6 +34,8 @@ public class Arrow : MonoBehaviour {
                 transform.parent = collision.transform;
 
             rb.constraints = RigidbodyConstraints.FreezeAll;
+
+            Destroy(gameObject, lifetime);
         }        
     }
 }
