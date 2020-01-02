@@ -25,12 +25,12 @@ public class ArrowHook : MonoBehaviour {
 
     void MovePlayer()
     {
-        Vector3 direction = transform.position - playerController.transform.position;
+        Vector3 direction = transform.position - playerController.transform.position;        
         playerController.transform.position += direction * travelSpeed * Time.deltaTime;
 
         float distance = Vector3.Distance(playerController.transform.position, hookLocation);
 
-        if (distance <= 0.3f)
+        if (distance <= 0.1f)
         {
             isFlying = false;
             playerController.enabled = true;
@@ -43,9 +43,4 @@ public class ArrowHook : MonoBehaviour {
         isFlying = true;
         playerController.enabled = false;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Debug.DrawLine(playerController.transform.position, transform.position, Color.green);
-    //}
 }

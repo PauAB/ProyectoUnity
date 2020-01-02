@@ -6,7 +6,9 @@ public class Arrow : MonoBehaviour {
 
     Rigidbody rb;
 
+    [SerializeField]
     private float lifetime = 1f;
+    [SerializeField]
     private float maxLifetime = 8f;
     private bool hitSomething = false;    
 
@@ -33,9 +35,11 @@ public class Arrow : MonoBehaviour {
             if (collision.rigidbody != null)
                 transform.parent = collision.transform;
 
+            //transform.rotation = Quaternion.Euler(collision.transform.forward);
+
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
-            Destroy(gameObject, lifetime);
+            Destroy(gameObject, lifetime);                       
         }        
     }
 }

@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Ground
   - Arrow
-  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,8 +17,8 @@ TagManager:
   - 
   - PostProcessing
   - Ground
-  - 
-  - 
+  - Burnable
+  - Gun
   - 
   - 
   - 

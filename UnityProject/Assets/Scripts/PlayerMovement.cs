@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);                    
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
@@ -31,20 +31,20 @@ public class PlayerMovement : MonoBehaviour {
         move = transform.right * x + transform.forward * z;
 
         if (isGrounded)       
-            velocity.y = gravity * Time.deltaTime;       
+            velocity.y = gravity * Time.fixedDeltaTime;       
 
         if (controller.enabled)
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * speed * Time.fixedDeltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
             velocity.y = jumpForce * -1f * gravity;
 
         if (!isGrounded && velocity.y < 0)
-            velocity.y += gravity * (fallMultiplier - 1) * Time.deltaTime;
+            velocity.y += gravity * (fallMultiplier - 1) * Time.fixedDeltaTime;
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.fixedDeltaTime;
 
         if (controller.enabled)
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.fixedDeltaTime);
     }
 }
