@@ -12,9 +12,8 @@ public class DamageHandler : MonoBehaviour {
 	void Start ()
     {
         hpBarScript = GetComponent<HpBar>();
-
-        if (hpBarScript.currentHp > 0)
-            alive = true;
+        
+        alive = true;
 	}
 
     void Update()
