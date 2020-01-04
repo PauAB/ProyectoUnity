@@ -17,13 +17,30 @@ public class PlayerMovement : MonoBehaviour {
     float x;
     float z;
     bool isGrounded;
+    bool touchingDeath;
 
     Vector3 move;    
     Vector3 velocity;
+    Vector3 initialPosition;
+    LayerMask deathMask;
+
+    void Start()
+    {
+        deathMask = LayerMask.GetMask("Water");
+        initialPosition = transform.position;
+    }
+
+    void Update()
+    {
+        if (touchingDeath)
+            transform.position = initialPosition;
+        
+    }
 
     void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        touchingDeath = Physics.CheckSphere(groundCheck.position, groundDistance, deathMask);
 
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");

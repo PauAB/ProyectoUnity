@@ -7,8 +7,7 @@ public class ArrowHook : MonoBehaviour {
     public int maxDistance;
     public int travelSpeed;
 
-    CharacterController playerController;    
-    Vector3 hookLocation;
+    CharacterController playerController;
 
     bool isFlying;
 
@@ -28,7 +27,7 @@ public class ArrowHook : MonoBehaviour {
         Vector3 direction = transform.position - playerController.transform.position;        
         playerController.transform.position += direction * travelSpeed * Time.deltaTime;
 
-        float distance = Vector3.Distance(playerController.transform.position, hookLocation);
+        float distance = Vector3.Distance(playerController.transform.position, transform.position);
 
         if (distance <= 0.1f)
         {
@@ -38,8 +37,7 @@ public class ArrowHook : MonoBehaviour {
     }       
 
     private void OnTriggerEnter(Collider other)
-    {        
-        hookLocation = transform.position;
+    {
         isFlying = true;
         playerController.enabled = false;
     }

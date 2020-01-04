@@ -6,15 +6,21 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour {
 
     public Camera playerCam;
-    public GameObject arrowPrefab;
-    public GameObject arrowFirePrefab;
+    public GameObject arrowPrefab;    
     public GameObject arrowHookPrefab;
+    public GameObject arrowFirePrefab;
     public GameObject arrowSteelPrefab;
     public Transform arrowSpawn;
-    public Slider chargeSlider;
-    public Image arrowFireUI;
+    public Slider chargeSlider;    
     public Image arrowHookUI;
+    public Image arrowFireUI;
     public Image arrowSteelUI;
+    public Text arrowHookAmountUI;
+    public Text arrowFireAmountUI;
+    public Text arrowSteelAmountUI;
+    public Image selectedHookBgUI;
+    public Image selectedFireBgUI;
+    public Image selectedSteelBgUI;
 
     public float speed = 20f;
     public float chargeMax;
@@ -23,28 +29,31 @@ public class PlayerManager : MonoBehaviour {
     public int maxArrowHook = 1;
     public int maxArrowSteel;
 
-    float chargeCurrent;
-    int currentArrowFire;
+    float chargeCurrent;    
     int currentArrowHook;
+    int currentArrowFire;
     int currentArrowSteel;
-    Color newColor;
+    bool touchingDeath;
+
+    Color newColor;    
 
     void Start()
-    {
-        newColor = arrowFireUI.color;
+    {        
+        newColor = arrowHookUI.color;
         newColor.a = 0.1f;
 
         arrowFireUI.color = newColor;
         arrowHookUI.color = newColor;
         arrowSteelUI.color = newColor;
 
-        currentArrowFire = maxArrowFire;
-        currentArrowHook = maxArrowHook;
-        currentArrowSteel = maxArrowSteel;
+        newColor.a = 0f;
+        selectedHookBgUI.color = newColor;
+        selectedFireBgUI.color = newColor;
+        selectedSteelBgUI.color = newColor;
     }
 
     void Update ()
-    {        
+    {
         if (Input.GetMouseButton(1) && chargeCurrent < chargeMax)
         {
             chargeCurrent += Time.deltaTime * chargeSpeedRate;
@@ -84,39 +93,8 @@ public class PlayerManager : MonoBehaviour {
             chargeSlider.value = chargeCurrent;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))            
-        {
-            if (currentArrowFire > 0)
-                arrowPrefab = arrowFirePrefab;
-
-            newColor.a = 1f;
-            arrowFireUI.color = newColor;
-            newColor.a = 0.1f;
-            arrowHookUI.color = newColor;
-            arrowSteelUI.color = newColor;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (currentArrowHook > 0)
-                arrowPrefab = arrowHookPrefab;
-
-            newColor.a = 1f;
-            arrowHookUI.color = newColor;
-            newColor.a = 0.1f;
-            arrowFireUI.color = newColor;
-            arrowSteelUI.color = newColor;
-        }            
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (currentArrowSteel > 0)
-                arrowPrefab = arrowSteelPrefab;
-
-            newColor.a = 1f;
-            arrowSteelUI.color = newColor;
-            newColor.a = 0.1f;
-            arrowFireUI.color = newColor;
-            arrowHookUI.color = newColor;
-        }
+        SwitchArrow();
+        ArrowUI();
     }
 
     void ShootArrow()
@@ -126,4 +104,141 @@ public class PlayerManager : MonoBehaviour {
         Rigidbody rb = newArrow.GetComponent<Rigidbody>();
         rb.velocity = playerCam.transform.forward * chargeCurrent * speed;        
     }
+
+    void SwitchArrow()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (currentArrowHook > 0)
+            {
+                arrowPrefab = arrowHookPrefab;
+
+                newColor.a = 1f;
+                selectedHookBgUI.color = newColor;
+
+                newColor.a = 0f;
+                selectedFireBgUI.color = newColor;
+                selectedSteelBgUI.color = newColor;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (currentArrowFire > 0)
+            {
+                arrowPrefab = arrowFirePrefab;
+
+                newColor.a = 1f;
+                selectedFireBgUI.color = newColor;
+
+                newColor.a = 0f;
+                selectedHookBgUI.color = newColor;
+                selectedSteelBgUI.color = newColor;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (currentArrowSteel > 0)
+            {
+                arrowPrefab = arrowSteelPrefab;
+
+                newColor.a = 1f;
+                selectedSteelBgUI.color = newColor;
+
+                newColor.a = 0f;
+                selectedHookBgUI.color = newColor;
+                selectedFireBgUI.color = newColor;
+            }            
+        }
+    }
+
+    void ArrowUI()
+    {
+        if (currentArrowHook > 0)
+        {
+            newColor.a = 1f;
+            arrowHookUI.color = newColor;
+            arrowHookAmountUI.text = currentArrowHook.ToString();
+        }            
+        else if (currentArrowHook <= 0)
+        {
+            newColor.a = 0.1f;
+            arrowHookUI.color = newColor;
+            arrowHookAmountUI.text = currentArrowHook.ToString();
+
+            newColor.a = 0f;
+            selectedHookBgUI.color = newColor;
+        }
+        
+        if (currentArrowFire > 0)
+        {
+            newColor.a = 1f;
+            arrowFireUI.color = newColor;
+            arrowFireAmountUI.text = currentArrowFire.ToString();
+        }
+        else if (currentArrowFire <= 0)
+        {
+            newColor.a = 0.1f;
+            arrowFireUI.color = newColor;
+            arrowFireAmountUI.text = currentArrowFire.ToString();
+
+            newColor.a = 0f;
+            selectedFireBgUI.color = newColor;
+        }
+
+        if (currentArrowSteel > 0)
+        {
+            newColor.a = 1f;
+            arrowSteelUI.color = newColor;
+            arrowSteelAmountUI.text = currentArrowSteel.ToString();
+        }
+        else if (currentArrowSteel <= 0)
+        {
+            newColor.a = 0.1f;
+            arrowSteelUI.color = newColor;
+            arrowSteelAmountUI.text = currentArrowSteel.ToString();
+
+            newColor.a = 0f;
+            selectedSteelBgUI.color = newColor;
+        }
+    }
+
+    public void PickArrow(string name, int amount)
+    {
+        if (name == "ArrowHookPick(Clone)")
+        {
+            currentArrowHook += amount;
+            arrowPrefab = arrowHookPrefab;
+
+            newColor.a = 1f;
+            selectedHookBgUI.color = newColor;
+
+            newColor.a = 0f;
+            selectedFireBgUI.color = newColor;
+            selectedSteelBgUI.color = newColor;
+        }
+        else if (name == "ArrowFirePick(Clone)")
+        {
+            currentArrowFire += amount;
+            arrowPrefab = arrowFirePrefab;
+
+            newColor.a = 1f;
+            selectedFireBgUI.color = newColor;
+
+            newColor.a = 0f;
+            selectedHookBgUI.color = newColor;
+            selectedSteelBgUI.color = newColor;
+        }
+        else if (name == "ArrowSteelPick(Clone)")
+        {
+            currentArrowSteel += amount;
+            arrowPrefab = arrowSteelPrefab;
+
+            newColor.a = 1f;
+            selectedSteelBgUI.color = newColor;
+
+            newColor.a = 0f;
+            selectedHookBgUI.color = newColor;
+            selectedFireBgUI.color = newColor;
+        }
+    }    
 }
