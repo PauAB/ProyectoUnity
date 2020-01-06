@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
 
-    public Camera playerCam;
-    public GameObject arrowPrefab;    
+    public Camera playerCam;    
     public GameObject arrowHookPrefab;
     public GameObject arrowFirePrefab;
     public GameObject arrowSteelPrefab;
@@ -35,6 +34,7 @@ public class PlayerManager : MonoBehaviour {
     int currentArrowSteel;
     bool touchingDeath;
 
+    GameObject arrowPrefab;
     Color newColor;    
 
     void Start()
@@ -54,43 +54,44 @@ public class PlayerManager : MonoBehaviour {
 
     void Update ()
     {
-        if (Input.GetMouseButton(1) && chargeCurrent < chargeMax)
+        if (arrowPrefab != null)
         {
-            chargeCurrent += Time.deltaTime * chargeSpeedRate;
-            chargeSlider.value = chargeCurrent;
-        }
+            if (Input.GetMouseButton(1) && chargeCurrent < chargeMax)
+            {
+                chargeCurrent += Time.deltaTime * chargeSpeedRate;
+                chargeSlider.value = chargeCurrent;
+            }
 
-        if (Input.GetMouseButtonUp(1))
-        {
-            if (arrowPrefab.name == "ArrowFire")
+            if (Input.GetMouseButtonUp(1))
             {
-                if (currentArrowFire > 0)
+                if (arrowPrefab.name == "ArrowFire")
                 {
-                    ShootArrow();
-                    currentArrowFire--;
+                    if (currentArrowFire > 0)
+                    {
+                        ShootArrow();
+                        currentArrowFire--;
+                    }
                 }
-            }
-            else if (arrowPrefab.name == "ArrowHook")
-            {
-                if (currentArrowHook > 0)
+                else if (arrowPrefab.name == "ArrowHook")
                 {
-                    ShootArrow();
-                    currentArrowHook--;
+                    if (currentArrowHook > 0)
+                    {
+                        ShootArrow();
+                        currentArrowHook--;
+                    }
                 }
-            }
-            else if (arrowPrefab.name == "ArrowSteel")
-            {
-                if (currentArrowSteel > 0)
+                else if (arrowPrefab.name == "ArrowSteel")
                 {
-                    ShootArrow();
-                    currentArrowSteel--;
-                }
-            }
-            else if (arrowPrefab.name == "Arrow")
-                ShootArrow();
+                    if (currentArrowSteel > 0)
+                    {
+                        ShootArrow();
+                        currentArrowSteel--;
+                    }
+                }                
 
-            chargeCurrent = 0f;
-            chargeSlider.value = chargeCurrent;
+                chargeCurrent = 0f;
+                chargeSlider.value = chargeCurrent;
+            }        
         }
 
         SwitchArrow();

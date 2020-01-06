@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 33152563}
-  totalHp: 100
+  totalHp: 50
   currentHp: 0
 --- !u!54 &65888464
 Rigidbody:
@@ -376,7 +376,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &65888465
 BoxCollider:
@@ -2583,7 +2583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 1286221528}
-  totalHp: 100
+  totalHp: 50
   currentHp: 0
 --- !u!54 &822803398
 Rigidbody:
@@ -2598,7 +2598,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &822803399
 BoxCollider:
@@ -3047,7 +3047,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 978075373}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.7, y: 15.62, z: -4}
+  m_LocalPosition: {x: -4.745, y: 15.62, z: -4}
   m_LocalScale: {x: 0.5, y: 6.25, z: 7}
   m_Children: []
   m_Father: {fileID: 622804036}
@@ -5255,7 +5255,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &1951372243
 BoxCollider:
@@ -5334,7 +5334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 223883212}
-  totalHp: 100
+  totalHp: 50
   currentHp: 0
 --- !u!1 &1966941627
 GameObject:

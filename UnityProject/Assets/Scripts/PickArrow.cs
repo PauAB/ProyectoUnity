@@ -59,46 +59,63 @@ public class PickArrow : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other)
-    {        
-        if (arrow != null)
+    {                
+        if (other.gameObject.tag == "Player")
         {
-            newBgColor.a = 1f;
-            newTextColor.a = 1f;
-            keyBackground.color = newBgColor;
-            keyText.color = newTextColor;
-        }        
+            if (arrow != null)
+            {
+                newBgColor.a = 1f;
+                newTextColor.a = 1f;
+                keyBackground.color = newBgColor;
+                keyText.color = newTextColor;
+            }
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        newBgColor.a = 0f;
-        newTextColor.a = 0f;
-        keyBackground.color = newBgColor;
-        keyText.color = newTextColor;
+        if (other.gameObject.tag == "Player")
+        {
+            newBgColor.a = 0f;
+            newTextColor.a = 0f;
+            keyBackground.color = newBgColor;
+            keyText.color = newTextColor;
+        }
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (other.gameObject.tag == "Player")
         {
-            int amount = 0;
-
-            if (other.GetComponent<PlayerManager>() != null)
+            if (arrow != null)
             {
-                if (arrow != null)
-                {
-                    if (arrow.name == "ArrowHookPick(Clone)")
-                        amount = 2;
-                    else if (arrow.name == "ArrowFirePick(Clone)")
-                        amount = 3;
-                    else if (arrow.name == "ArrowSteelPick(Clone)")
-                        amount = 5;
-
-                    other.GetComponent<PlayerManager>().PickArrow(arrow.name, amount);
-                }                
+                newBgColor.a = 1f;
+                newTextColor.a = 1f;
+                keyBackground.color = newBgColor;
+                keyText.color = newTextColor;
             }
 
-            Destroy(arrow);
-        }            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                int amount = 0;
+
+                if (other.GetComponent<PlayerManager>() != null)
+                {
+                    if (arrow != null)
+                    {
+                        if (arrow.name == "ArrowHookPick(Clone)")
+                            amount = 2;
+                        else if (arrow.name == "ArrowFirePick(Clone)")
+                            amount = 3;
+                        else if (arrow.name == "ArrowSteelPick(Clone)")
+                            amount = 5;
+
+                        other.GetComponent<PlayerManager>().PickArrow(arrow.name, amount);
+                    }
+                }
+
+                Destroy(arrow);
+            }
+        }                    
     }   
 }
