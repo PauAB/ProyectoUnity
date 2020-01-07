@@ -22,5 +22,8 @@ public class ArrowSteel : MonoBehaviour {
     {
         platMesh.enabled = true;
         platCol.enabled = true;
+           
+        //Vector3 perp = Vector3.Cross(other.transform.up, other.transform.right);
+        //transform.parent.rotation = Quaternion.Euler(perp.normalized);
     }
 }

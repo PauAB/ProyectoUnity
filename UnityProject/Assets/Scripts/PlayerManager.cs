@@ -56,7 +56,17 @@ public class PlayerManager : MonoBehaviour {
     {
         if (arrowPrefab != null)
         {
-            if (Input.GetMouseButton(1) && chargeCurrent < chargeMax)
+            if (currentArrowHook >= 2)
+                currentArrowHook = 2;
+
+            if (currentArrowFire >= 3)
+                currentArrowFire = 3;
+
+            if (currentArrowSteel >= 5)
+                currentArrowSteel = 5;
+
+            if (Input.GetMouseButton(1) && chargeCurrent < chargeMax
+                && (currentArrowHook > 0 || currentArrowFire > 0 || currentArrowSteel > 0))
             {
                 chargeCurrent += Time.deltaTime * chargeSpeedRate;
                 chargeSlider.value = chargeCurrent;
@@ -207,7 +217,11 @@ public class PlayerManager : MonoBehaviour {
     {
         if (name == "ArrowHookPick(Clone)")
         {
-            currentArrowHook += amount;
+            if (currentArrowHook < 2)
+                currentArrowHook += amount;
+            else if (currentArrowHook >= 2)
+                currentArrowHook = 2;
+
             arrowPrefab = arrowHookPrefab;
 
             newColor.a = 1f;
@@ -219,7 +233,11 @@ public class PlayerManager : MonoBehaviour {
         }
         else if (name == "ArrowFirePick(Clone)")
         {
-            currentArrowFire += amount;
+            if (currentArrowFire < 3)
+                currentArrowFire += amount;
+            else if (currentArrowFire >= 3)
+                currentArrowFire = 3;
+
             arrowPrefab = arrowFirePrefab;
 
             newColor.a = 1f;
@@ -231,7 +249,11 @@ public class PlayerManager : MonoBehaviour {
         }
         else if (name == "ArrowSteelPick(Clone)")
         {
-            currentArrowSteel += amount;
+            if (currentArrowSteel < 5)
+                currentArrowSteel += amount;
+            else if (currentArrowSteel >= 5)
+                currentArrowSteel = 5;
+
             arrowPrefab = arrowSteelPrefab;
 
             newColor.a = 1f;

@@ -3345,7 +3345,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1188362215}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -20, y: 1.2, z: 0}
+  m_LocalPosition: {x: -20.00963, y: 13.74, z: 0.055101722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 282840814}
@@ -3387,13 +3387,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 282840813}
-  arrowPrefab: {fileID: 1276859305123010, guid: dfff224a06df81d488c25d7b97c9e7f1,
-    type: 2}
   arrowHookPrefab: {fileID: 1527304226867618, guid: 8976d4e7cd490d347858d741599b3839,
     type: 2}
   arrowFirePrefab: {fileID: 1988689620073238, guid: 562c56c61825d0244999d1caf1960e9d,
     type: 2}
-  arrowSteelPrefab: {fileID: 1391334604632342, guid: 729e908e6d4e81c4e8a618dd26e2162f,
+  arrowSteelPrefab: {fileID: 1022161699171432, guid: 729e908e6d4e81c4e8a618dd26e2162f,
     type: 2}
   arrowSpawn: {fileID: 1396877346}
   chargeSlider: {fileID: 396608550}

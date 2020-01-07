@@ -24,21 +24,20 @@ public class ArrowHook : MonoBehaviour {
 
     void MovePlayer()
     {
-        Vector3 direction = transform.position - playerController.transform.position;        
-        playerController.transform.position += direction * travelSpeed * Time.deltaTime;
+        Vector3 direction = transform.position - playerController.transform.position;
+
+        playerController.Move(direction * travelSpeed * Time.deltaTime);
 
         float distance = Vector3.Distance(playerController.transform.position, transform.position);
 
         if (distance <= 0.1f)
         {
-            isFlying = false;
-            playerController.enabled = true;
+            isFlying = false;            
         }
     }       
 
     private void OnTriggerEnter(Collider other)
     {
-        isFlying = true;
-        playerController.enabled = false;
+        isFlying = true;        
     }
 }
