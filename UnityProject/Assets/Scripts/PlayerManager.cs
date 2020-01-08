@@ -35,10 +35,13 @@ public class PlayerManager : MonoBehaviour {
     bool touchingDeath;
 
     GameObject arrowPrefab;
-    Color newColor;    
+    Color newColor;
+    AudioSource audioSource;
 
     void Start()
-    {        
+    {
+        audioSource = GetComponent<AudioSource>();
+
         newColor = arrowHookUI.color;
         newColor.a = 0.1f;
 
@@ -73,7 +76,7 @@ public class PlayerManager : MonoBehaviour {
             }
 
             if (Input.GetMouseButtonUp(1))
-            {
+            {                
                 if (arrowPrefab.name == "ArrowFire")
                 {
                     if (currentArrowFire > 0)
@@ -110,6 +113,8 @@ public class PlayerManager : MonoBehaviour {
 
     void ShootArrow()
     {
+        audioSource.Play();
+
         GameObject newArrow = Instantiate(arrowPrefab, arrowSpawn.position, Quaternion.identity);        
 
         Rigidbody rb = newArrow.GetComponent<Rigidbody>();

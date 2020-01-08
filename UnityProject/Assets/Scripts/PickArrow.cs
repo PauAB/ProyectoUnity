@@ -14,11 +14,14 @@ public class PickArrow : MonoBehaviour {
 
     GameObject arrow;
     Vector3 arrowPosition;
+    AudioSource audioSource;
     Color newBgColor;
     Color newTextColor;
 
 	void Start ()
     {
+        audioSource = GetComponent<AudioSource>();
+
         newBgColor = keyBackground.color;
         newTextColor = keyText.color;
         currentCd = respawnCd;
@@ -111,6 +114,8 @@ public class PickArrow : MonoBehaviour {
                             amount = 5;
 
                         other.GetComponent<PlayerManager>().PickArrow(arrow.name, amount);
+
+                        audioSource.Play();
                     }
                 }
 

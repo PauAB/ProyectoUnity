@@ -6,7 +6,8 @@ public class Arrow : MonoBehaviour {
 
     public float alpha = 1f;
 
-    Rigidbody rb;    
+    Rigidbody rb;
+    AudioSource audioSource;
 
     float rayDistance = 3f;    
 
@@ -18,8 +19,10 @@ public class Arrow : MonoBehaviour {
 
 	void Start ()
     {
-        rb = GetComponent<Rigidbody>();        
-        transform.rotation = Quaternion.LookRotation(rb.velocity);        
+        rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+
+        transform.rotation = Quaternion.LookRotation(rb.velocity);
     }
 		
 	void Update ()
@@ -48,6 +51,8 @@ public class Arrow : MonoBehaviour {
     {        
         if (collision.collider.tag != "Arrow" && collision.collider.tag != "Player")
         {
+            audioSource.Play();
+
             hitSomething = true;
             
             if (collision.rigidbody != null)
