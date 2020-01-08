@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {    
+public class Arrow : MonoBehaviour {
 
-    Rigidbody rb;
+    public float alpha = 1f;
+
+    Rigidbody rb;    
+
+    float rayDistance = 3f;    
 
     [SerializeField]
     private float lifetime = 1f;
@@ -23,6 +27,20 @@ public class Arrow : MonoBehaviour {
         if (!hitSomething)
             transform.rotation = Quaternion.LookRotation(rb.velocity);
 
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, rayDistance))
+        {            
+            Debug.DrawRay(transform.position, transform.forward, Color.green);            
+
+            Vector3 dist = alpha * transform.position + alpha * hitInfo.point;
+
+            if (dist.z <= 1.5f)
+            {
+                rb.constraints = RigidbodyConstraints.FreezeRotation;                
+            }
+        }
+
         Destroy(gameObject, maxLifetime);
 	}
 
@@ -34,10 +52,8 @@ public class Arrow : MonoBehaviour {
             
             if (collision.rigidbody != null)
                 transform.parent = collision.transform;
-
-            //transform.rotation = Quaternion.Euler(collision.transform.forward);
-
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            
+            rb.isKinematic = true;
 
             Destroy(gameObject, lifetime);                       
         }        

@@ -110,7 +110,7 @@ public class PlayerManager : MonoBehaviour {
 
     void ShootArrow()
     {
-        GameObject newArrow = Instantiate(arrowPrefab, arrowSpawn.position, Quaternion.identity);
+        GameObject newArrow = Instantiate(arrowPrefab, arrowSpawn.position, Quaternion.identity);        
 
         Rigidbody rb = newArrow.GetComponent<Rigidbody>();
         rb.velocity = playerCam.transform.forward * chargeCurrent * speed;        
