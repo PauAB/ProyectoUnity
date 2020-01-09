@@ -38,6 +38,7 @@ public class ArrowHook : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        isFlying = true;        
+        if (other.tag != "DeathTrigger")
+            isFlying = true;        
     }
 }

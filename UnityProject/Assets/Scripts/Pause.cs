@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public Camera cam;
     
     bool displayed;
 
@@ -28,19 +29,30 @@ public class Pause : MonoBehaviour
         if (displayed)
         {
             pauseMenu.SetActive(false);
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            //cam.cullingMask |= 1 << LayerMask.NameToLayer("");
+            //cam.cullingMask &= ~(1 << LayerMask.NameToLayer("UI"));
 
             Time.timeScale = 1f;            
         }            
         else
         {
             pauseMenu.SetActive(true);
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
+            //cam.cullingMask |= 1 << LayerMask.NameToLayer("UI");
+            //cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Gun"));
+
             Time.timeScale = 0f;            
         }
+
+        cam.cullingMask ^= 1 << LayerMask.NameToLayer("UI");
+        cam.cullingMask ^= 1 << LayerMask.NameToLayer("Gun");
                     
         displayed = !displayed;        
     }

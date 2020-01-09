@@ -49,7 +49,7 @@ public class Arrow : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {        
-        if (collision.collider.tag != "Arrow" && collision.collider.tag != "Player")
+        if (collision.collider.tag != "Arrow" && collision.collider.tag != "Player"  && collision.collider.tag != "DeathTrigger")
         {
             audioSource.Play();
 
