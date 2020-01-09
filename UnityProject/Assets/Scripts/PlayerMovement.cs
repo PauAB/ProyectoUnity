@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     public CharacterController controller;
     public Transform groundCheck;
     public LayerMask groundMask;
+    public AudioSource audioSource;
 
     public float speed = 12f;    
     public float gravity = -9.81f;
@@ -34,7 +35,18 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (touchingDeath)
             transform.position = initialPosition;
-        
+
+        if (x != 0f || z != 0f)
+        {
+            if (isGrounded)
+            {
+                if (!audioSource.isPlaying)
+                    audioSource.Play();
+            }            
+        }
+        else
+            audioSource.Stop();
+
     }
 
     void FixedUpdate()
