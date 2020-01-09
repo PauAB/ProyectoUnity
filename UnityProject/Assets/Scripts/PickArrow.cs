@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PickArrow : MonoBehaviour {
 
@@ -18,8 +19,12 @@ public class PickArrow : MonoBehaviour {
     Color newBgColor;
     Color newTextColor;
 
+    string sceneName;
+
 	void Start ()
     {
+        sceneName = SceneManager.GetActiveScene().name;
+
         audioSource = GetComponent<AudioSource>();
 
         newBgColor = keyBackground.color;
@@ -36,7 +41,7 @@ public class PickArrow : MonoBehaviour {
         newBgColor.a = 0f;
         newTextColor.a = 0f;        
         keyBackground.color = newBgColor;
-        keyText.color = newTextColor;
+        keyText.color = newTextColor;        
     }
 		
 	void Update ()
@@ -106,12 +111,20 @@ public class PickArrow : MonoBehaviour {
                 {
                     if (arrow != null)
                     {
-                        if (arrow.name == "ArrowHookPick(Clone)")
-                            amount = 2;
-                        else if (arrow.name == "ArrowFirePick(Clone)")
-                            amount = 3;
-                        else if (arrow.name == "ArrowSteelPick(Clone)")
-                            amount = 5;
+                        if (arrow.name == "ArrowHookPick(Clone)" && sceneName == "Gameplay")                      
+                            amount = 2;                                                                                                          
+                        else if (arrow.name == "ArrowHookPick(Clone)" && sceneName == "FirstLevel")                        
+                            amount = 3;                                                                  
+
+                        if (arrow.name == "ArrowFirePick(Clone)" && sceneName == "Gameplay")                        
+                            amount = 3;                                                                  
+                        else if (arrow.name == "ArrowFirePick(Clone)" && sceneName == "FirstLevel")                        
+                            amount = 3;                                               
+
+                        if (arrow.name == "ArrowSteelPick(Clone)" && sceneName == "Gameplay")                        
+                            amount = 5;                                                                  
+                        else if (arrow.name == "ArrowSteelPick(Clone)" && sceneName == "FirstLevel")                        
+                            amount = 7;
 
                         other.GetComponent<PlayerManager>().PickArrow(arrow.name, amount);
 

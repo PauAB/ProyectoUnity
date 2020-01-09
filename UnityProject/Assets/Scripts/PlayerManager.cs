@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour {
 
@@ -20,18 +21,19 @@ public class PlayerManager : MonoBehaviour {
     public Image selectedHookBgUI;
     public Image selectedFireBgUI;
     public Image selectedSteelBgUI;
+    public Scenes sceneManager;
 
     public float speed = 20f;
     public float chargeMax;
-    public float chargeSpeedRate;
-    public int maxArrowFire;
-    public int maxArrowHook = 1;
-    public int maxArrowSteel;
+    public float chargeSpeedRate;    
 
     float chargeCurrent;    
     int currentArrowHook;
     int currentArrowFire;
-    int currentArrowSteel;
+    int currentArrowSteel;    
+    int maxArrowHook;
+    int maxArrowFire;
+    int maxArrowSteel;
     bool touchingDeath;
 
     GameObject arrowPrefab;
@@ -40,6 +42,8 @@ public class PlayerManager : MonoBehaviour {
 
     void Start()
     {
+        Time.timeScale = 1f;
+
         audioSource = GetComponent<AudioSource>();
 
         newColor = arrowHookUI.color;
@@ -53,20 +57,35 @@ public class PlayerManager : MonoBehaviour {
         selectedHookBgUI.color = newColor;
         selectedFireBgUI.color = newColor;
         selectedSteelBgUI.color = newColor;
+
+        if (SceneManager.GetActiveScene().name == "Gameplay")
+            maxArrowHook = 2;
+        else if (SceneManager.GetActiveScene().name == "FirstLevel")
+            maxArrowHook = 3;
+
+        if (SceneManager.GetActiveScene().name == "Gameplay")
+            maxArrowFire = 3;
+        else if (SceneManager.GetActiveScene().name == "FirstLevel")
+            maxArrowFire = 3;
+
+        if (SceneManager.GetActiveScene().name == "Gameplay")
+            maxArrowSteel = 5;
+        else if (SceneManager.GetActiveScene().name == "FirstLevel")
+            maxArrowSteel = 7;        
     }
 
     void Update ()
     {
         if (arrowPrefab != null)
         {
-            if (currentArrowHook >= 2)
-                currentArrowHook = 2;
+            if (currentArrowHook >= maxArrowHook)
+                currentArrowHook = maxArrowHook;
 
-            if (currentArrowFire >= 3)
-                currentArrowFire = 3;
+            if (currentArrowFire >= maxArrowFire)
+                currentArrowFire = maxArrowFire;
 
-            if (currentArrowSteel >= 5)
-                currentArrowSteel = 5;
+            if (currentArrowSteel >= maxArrowSteel)
+                currentArrowSteel = maxArrowSteel;
 
             if (Input.GetMouseButton(1) && chargeCurrent < chargeMax
                 && (currentArrowHook > 0 || currentArrowFire > 0 || currentArrowSteel > 0))
@@ -221,11 +240,11 @@ public class PlayerManager : MonoBehaviour {
     public void PickArrow(string name, int amount)
     {
         if (name == "ArrowHookPick(Clone)")
-        {
-            if (currentArrowHook < 2)
+        {                    
+            if (currentArrowHook < maxArrowHook)
                 currentArrowHook += amount;
-            else if (currentArrowHook >= 2)
-                currentArrowHook = 2;
+            else if (currentArrowHook >= maxArrowHook)
+                currentArrowHook = maxArrowHook;            
 
             arrowPrefab = arrowHookPrefab;
 
@@ -237,11 +256,11 @@ public class PlayerManager : MonoBehaviour {
             selectedSteelBgUI.color = newColor;
         }
         else if (name == "ArrowFirePick(Clone)")
-        {
-            if (currentArrowFire < 3)
-                currentArrowFire += amount;
-            else if (currentArrowFire >= 3)
-                currentArrowFire = 3;
+        {            
+            if (currentArrowFire < maxArrowFire)            
+                currentArrowFire += amount;                         
+            else if (currentArrowFire >= maxArrowFire)            
+                currentArrowFire = maxArrowFire;                                                     
 
             arrowPrefab = arrowFirePrefab;
 
@@ -253,11 +272,11 @@ public class PlayerManager : MonoBehaviour {
             selectedSteelBgUI.color = newColor;
         }
         else if (name == "ArrowSteelPick(Clone)")
-        {
-            if (currentArrowSteel < 5)
+        {            
+            if (currentArrowSteel < maxArrowSteel)
                 currentArrowSteel += amount;
-            else if (currentArrowSteel >= 5)
-                currentArrowSteel = 5;
+            else if (currentArrowSteel >= maxArrowSteel)
+                currentArrowSteel = maxArrowSteel;            
 
             arrowPrefab = arrowSteelPrefab;
 
@@ -268,5 +287,20 @@ public class PlayerManager : MonoBehaviour {
             selectedHookBgUI.color = newColor;
             selectedFireBgUI.color = newColor;
         }
-    }    
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "End")
+        {
+            if (SceneManager.GetActiveScene().name == "Gameplay")
+                sceneManager.ChangeScene("FirstLevel");
+            else if (SceneManager.GetActiveScene().name == "FirstLevel")
+            {
+                sceneManager.ChangeScene("Menu");
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }                
+        }
+    }
 }

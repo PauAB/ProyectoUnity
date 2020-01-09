@@ -74,9 +74,4 @@ public class Pause : MonoBehaviour
                     
         displayed = !displayed;        
     }
-
-    public void Exit()
-    {
-        Application.Quit();
-    }
 }
