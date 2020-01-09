@@ -1224,7 +1224,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7c00a11693bf2d0448153ebd169eff31, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.025
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6329,6 +6329,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1350288769}
   cam: {fileID: 405312222}
+  audioSources:
+  - {fileID: 1188362220}
+  - {fileID: 1905899030}
+  - {fileID: 936656214}
+  - {fileID: 648763389}
+  - {fileID: 608643066}
+  vol1: 1
+  vol2: 0.1
+  vol3: 1
+  vol4: 1
+  vol5: 1
 --- !u!1 &1286221526
 GameObject:
   m_ObjectHideFlags: 0
@@ -8972,7 +8983,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 16d4e3bfb7a1bf845b741a22a0ce56f7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
